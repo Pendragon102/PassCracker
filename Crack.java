@@ -1,19 +1,19 @@
 import java.security.*;
 import java.math.*;
-
+import java.util.*;
 
 public class Crack{
-  public static void main(String[] args) throws Exception{
+  public static void main(String args) throws Exception{
     Crack test = new Crack();
-    Scanner in = new Scanner(System.in);
-    System.out.println("Please input a password: ");
-    String pass = in.nextLine();
-    String passmd5 = test.MD5(pass);
-    if(args.length > 0){
-      for(String s: args){
-        String clamd5 = test.MD5(s);
-        
-      }
+    Scanner in = new Scanner(System.in);   
+    String passmd5;
+    if(args != null){    
+      passmd5 = test.MD5(s);
+    }
+    else{
+      System.out.println("Please input a password: ");
+      String pass = in.nextLine();
+      passmd5 = test.MD5(pass);
     }
     String md5 = test.MD5("brokenwings");
     System.out.println("MD5 Hash: " + md5);
