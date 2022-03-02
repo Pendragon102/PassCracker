@@ -8,7 +8,7 @@ public class Crack{
     Scanner in = new Scanner(System.in);   
     String passmd5;
     if(args != null){    
-      passmd5 = test.MD5(s);
+      passmd5 = test.MD5(args);
     }
     else{
       System.out.println("Please input a password: ");
