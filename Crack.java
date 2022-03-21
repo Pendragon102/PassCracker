@@ -6,7 +6,7 @@ import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.nio.charset.StandardCharsets;
 
-class Crack {
+class Main {
   private static String cyString = "";
   private static String pass = "";
   private static String mode = "";
@@ -22,8 +22,23 @@ class Crack {
     System.out.println("Please input a password (if plaintext, max length 8 characters):\n");
     pass = in.next();
     System.out.println("Alrighty, workin' on it!");
-    if(mode.equals("md5")){
-      pass = MD5(pass.toLowerCase());
+    if(mode.equals("plain")){
+      cyString = bruteforce(pass);
+    }
+    else{
+      while(passList.hasNextLine()){
+        String data = passList.nextLine();
+        if(mode.equals("md5")){
+          pass = MD5(pass.toLowerCase());
+        }
+        else if(mode.equals("sha256")){
+          pass = SHA256(pass.toLowerCase());
+        }
+        else if(mode.equals("bcrypt")){
+          
+        }
+      }
+      
       cyString = (pass);
     }
     System.out.println("Your password is: " + cyString);
