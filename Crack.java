@@ -2,11 +2,12 @@ import java.util.*;
 import java.security.*;
 import java.math.*;
 import java.io.*;
+import java.lang.*;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.nio.charset.StandardCharsets;
 
-class Main {
+class Crack {
   private static String cyString = "";
   private static String pass = "";
   private static String mode = "";
@@ -26,20 +27,21 @@ class Main {
       cyString = bruteforce(pass);
     }
     else{
-      while(passList.hasNextLine()){
-        String data = passList.nextLine();
-        if(mode.equals("md5")){
+      if(mode.equals("md5")){
           pass = MD5(pass.toLowerCase());
         }
         else if(mode.equals("sha256")){
           pass = SHA256(pass.toLowerCase());
         }
         else if(mode.equals("bcrypt")){
-          
+          pass = BCrypt.hashpw(pass, BCrypt.gensalt());
+        }
+      while(passList.hasNextLine()){
+        String data = passList.nextLine();
+        if(data.equals(pass)){
+          cyString = data;
         }
       }
-      
-      cyString = (pass);
     }
     System.out.println("Your password is: " + cyString);
     }
@@ -62,8 +64,10 @@ class Main {
                   char c7 = ch[o];
                   for (int p = 0; p < ch.length; p++) {
                     char c8 = ch[p];
-                    currentString = "" + c1 + c2 + c3 + c4 + c5 + c6 + c7 + c8;
-                    if(currentString.equals(check));
+                    String currentString = "" + c1 + c2 + c3 + c4 + c5 + c6 + c7 + c8;
+                    if(currentString.equals(check)){
+                      return currentString;
+                    }
                   }
                 }
               }
@@ -72,7 +76,7 @@ class Main {
         }
       }
     }
-    return new String("yes");
+    return new String("Not found or longer than 8 characters sowwy");
   }
     
   public static String MD5(String s) throws Exception{
